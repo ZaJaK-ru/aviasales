@@ -1,0 +1,39 @@
+.sort {
+  background-color: white;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  list-style: none;
+  
+  display: flex;
+  width: 100%;
+
+  &__item {
+    flex:1 1 auto;
+    width: 33%;
+  }
+
+  &__item input {
+    display: none;
+  }
+
+  &__item label {
+    white-space: nowrap;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__item input[id^="item"]:checked + label {
+    background-color: #2196F3;
+    color: white;
+  }
+}

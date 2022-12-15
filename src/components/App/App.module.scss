@@ -1,0 +1,36 @@
+.app {
+  background-color: #E5E5E5;
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+  }
+
+  &__logo {
+    filter: drop-shadow(0px 8px 11px rgba(55, 104, 142, 0.25));
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  &__aside {
+    background-color: white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+}
