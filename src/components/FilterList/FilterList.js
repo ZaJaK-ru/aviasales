@@ -1,38 +1,73 @@
+/* eslint-disable no-param-reassign */
+import { connect } from 'react-redux';
+
+import * as actions from '../../actions';
+
 import styles from './FilterList.module.scss';
 
-export default function FilterList() {
+function FilterList({ filter, setFilter }) {
+  const onChange = (event) => {
+    const newFilter = [...filter];
+
+    if (event.target.name === 'all') {
+      newFilter.map((item) => {
+        item.checked = event.target.checked;
+        return item;
+      });
+    } else {
+      newFilter.map((item) => {
+        if (item.name === 'all') {
+          item.checked = false;
+        }
+        if (event.target.name === item.name) {
+          item.checked = event.target.checked;
+        }
+        return item;
+      });
+    }
+
+    let count = 0;
+    newFilter.forEach((element) => {
+      if (element.checked) {
+        count += 1;
+      }
+    });
+    if (count >= 4) {
+      newFilter.map((item) => {
+        item.checked = true;
+        return item;
+      });
+    }
+    setFilter(newFilter);
+  };
+
+  const createСheckbox = filter?.map((item) => {
+    const { label, name, checked } = item;
+    return (
+      <li key={name}>
+        <label className={styles.filter} htmlFor={name}>
+          <input
+            className={styles.filter__checkbox}
+            type="checkbox"
+            checked={checked}
+            onChange={onChange}
+            name={name}
+            id={name}
+          />
+          {label}
+        </label>
+      </li>
+    );
+  });
+
   return (
     <>
-      <h4 className={styles.filterlist__title}>Количество пересадок</h4>
-      <ul className={styles.filterlist}>
-        <li>
-          <label className={styles.filter} htmlFor="all">
-            <input className={styles.filter__checkbox} type="checkbox" id="all" />
-            Все
-          </label>
-        </li>
-        <li>
-          <label className={styles.filter} htmlFor="trans_no">
-            <input className={styles.filter__checkbox} type="checkbox" id="trans_no" />
-            Без пересадок
-          </label>
-        </li>
-        <li>
-          <label className={styles.filter} htmlFor="trans_1">
-            <input className={styles.filter__checkbox} type="checkbox" id="trans_1" />1 пересадка
-          </label>
-        </li>
-        <li>
-          <label className={styles.filter} htmlFor="trans_2">
-            <input className={styles.filter__checkbox} type="checkbox" id="trans_2" />2 пересадки
-          </label>
-        </li>
-        <li>
-          <label className={styles.filter} htmlFor="trans_3">
-            <input className={styles.filter__checkbox} type="checkbox" id="trans_3" />3 пересадки
-          </label>
-        </li>
-      </ul>
+      <h3 className={styles.filterlist__title}>Количество пересадок</h3>
+      <ul className={styles.filterlist}>{createСheckbox}</ul>
     </>
   );
 }
+
+const mapStateToProps = ({ filter }) => ({ filter });
+
+export default connect(mapStateToProps, actions)(FilterList);
