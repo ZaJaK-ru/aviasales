@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../actions';
 
-import styles from './FilterList.module.scss';
+import styles from './Filter.module.scss';
 
-function FilterList({ filter, setFilter }) {
+function Filter({ filter, setFilter }) {
   const onChange = (event) => {
     const newFilter = [...filter];
 
@@ -41,7 +41,7 @@ function FilterList({ filter, setFilter }) {
     setFilter(newFilter);
   };
 
-  const createСheckbox = filter?.map((item) => {
+  const filters = filter?.map((item) => {
     const { label, name, checked } = item;
     return (
       <li key={name}>
@@ -63,11 +63,11 @@ function FilterList({ filter, setFilter }) {
   return (
     <>
       <h3 className={styles.filterlist__title}>Количество пересадок</h3>
-      <ul className={styles.filterlist}>{createСheckbox}</ul>
+      <ul className={styles.filterlist}>{filters}</ul>
     </>
   );
 }
 
 const mapStateToProps = ({ filter }) => ({ filter });
 
-export default connect(mapStateToProps, actions)(FilterList);
+export default connect(mapStateToProps, actions)(Filter);

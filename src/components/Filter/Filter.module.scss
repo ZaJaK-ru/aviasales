@@ -1,6 +1,7 @@
 .filterlist {
   display: flex;
   flex-direction: column;
+  max-width: 500px;
   margin-bottom: 10px;
   font-style: normal;
   font-weight: 400;
@@ -15,6 +16,11 @@
     line-height: 12px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 780px) {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 
